@@ -26,11 +26,8 @@ function App() {
     return (
         <div>
             <h1>Photo App</h1>
-
             <h2>Total Photos: {totalPhotos}</h2>
-
             <RegisterPhoto addPhoto={addPhoto} />
-
             <div>
                 {photos.map((p) => (
                     <PhotoCard key={p.id} photo={p} />
@@ -39,5 +36,4 @@ function App() {
         </div>
     );
 }
-
 export default App;
