@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect, useMemo } from "react";
+import PhotoCard from "./components/PhotoCard";
+import RegisterPhoto from "./components/RegisterPhoto";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [photos, setPhotos] = useState([]);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    useEffect(() => {
+        fetch("https://jsonplaceholder.typicode.com/photos?_limit=5")
+            .then((res) => res.json())
+            .then((data) => {
+                const updated = data.map((p) => ({
+                    ...p,
+                    saved: false,
+                    category: "Nature",
+                }));
+                setPhotos(updated);
+            });
+    }, []);
+
+    const addPhoto = (photo) => {
+        setPhotos([...photos, photo]);
+    };
+
+    const totalPhotos = useMemo(() => {
+        return photos.length;
+    }, [photos]);
+    return (
+        <div>
+            <h1>Photo App</h1>
+
+            <h2>Total Photos: {totalPhotos}</h2>
+
+            <RegisterPhoto addPhoto={addPhoto} />
+
+            <div>
+                {photos.map((p) => (
+                    <PhotoCard key={p.id} photo={p} />
+                ))}
+            </div>
+        </div>
+    );
 }
 
-export default App
+export default App;
