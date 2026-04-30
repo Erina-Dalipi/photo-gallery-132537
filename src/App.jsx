@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import PhotoCard from "./components/PhotoCard";
 import RegisterPhoto from "./components/RegisterPhoto";
-
+//Erina Dalipi 132537
 function App() {
     const [photos, setPhotos] = useState([]);
 
