@@ -39,7 +39,7 @@ function RegisterPhoto({ addPhoto }) {
         setSaved(false);
         setCategory("Nature");
         setError("");
-        
+
 
     };
 

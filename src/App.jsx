@@ -17,11 +17,9 @@ function App() {
                 setPhotos(updated);
             });
     }, []);
-
     const addPhoto = (photo) => {
         setPhotos([...photos, photo]);
     };
-
     const totalPhotos = useMemo(() => {
         return photos.length;
     }, [photos]);
